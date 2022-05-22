@@ -36,7 +36,7 @@ const Tools = ({ tools }) => {
       <button
       onClick={() => naviagteToPurchase()}
        
-        className="button-inv btn btn-secondary"
+        className="button-inv btn btn-secondary text-white"
       >
         Order: {name}
       </button>
