@@ -12,7 +12,7 @@ const Tool = () => {
     },[])
     return (
         <div className='tool-title'>
-            <h2 className="m-5 text-3xl">Our Tools</h2>
+            <h2 className="m-5 text-3xl text-secondary">Our Tools</h2>
             <div className="tool-container">
                 {
                     tool.map(tools => <Tools
