@@ -27,12 +27,12 @@ const Tools = ({ tools }) => {
       <p>
         <small>{description}</small>
       </p>
-      <p>
-        <small>minimum order quantity: {minimumorderquantity}</small>
-      </p> 
-      <p>
-        <small>available quantity: {availablequantity}</small>
-      </p>
+      <h2 className="mt-2">
+        <>minimum order quantity: {minimumorderquantity}</>
+      </h2> 
+      <h2>
+        <>available quantity: {availablequantity}</>
+      </h2>
       <button
       onClick={() => naviagteToPurchase()}
        

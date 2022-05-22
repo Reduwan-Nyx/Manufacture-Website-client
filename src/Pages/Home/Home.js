@@ -1,5 +1,6 @@
 import React from 'react';
 import Banner from './Banner';
+import Bussiness from './Bussiness';
 import Tool from './Tool';
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
         <div className='px-12'>
            <Banner></Banner>
            <Tool></Tool>
+           <Bussiness></Bussiness>
         </div>
     );
 };
