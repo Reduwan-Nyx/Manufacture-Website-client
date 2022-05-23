@@ -2,7 +2,7 @@ import React from "react";
 
 const BussinessInfo = ({bussinessInfo}) => {
   return (
-    <div class="card w-96 ">
+    <div class="card">
       <figure class="px-10 pt-10">
         <img
           src={bussinessInfo.img}

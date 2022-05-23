@@ -2,7 +2,7 @@ import React from 'react';
 
 const Featured = ({feature}) => {
     return (
-        <div class="card w-96 ">
+        <div class="card ">
         <figure class="px-10 pt-10">
           <img width={100}
             src={feature.img}
