@@ -1,19 +1,14 @@
 import React from "react";
 
-const BussinessInfo = ({bussinessInfo}) => {
+const BussinessInfo = ({ bussinessInfo }) => {
   return (
-    <div class="card">
-      <figure class="px-10 pt-10">
-        <img
-          src={bussinessInfo.img}
-          alt="Shoes"
-          class="rounded-xl"
-        />
+    <div className="card">
+      <figure className="px-10 pt-10">
+        <img src={bussinessInfo.img} alt="Shoes" className="rounded-xl" />
       </figure>
-      <div class="card-body items-center text-center">
-       
+      <div className="card-body items-center text-center">
         <h2>{bussinessInfo.number}</h2>
-        <p class="card-title">{bussinessInfo.name}</p>
+        <p className="card-title">{bussinessInfo.name}</p>
       </div>
     </div>
   );

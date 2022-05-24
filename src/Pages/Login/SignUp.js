@@ -1,12 +1,13 @@
-import React from "react";
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import React from 'react';
+import {  useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 
 import Loading from "../Shared/Loading";
-const Login = () => {
-  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+
+const SignUp = () => {
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const {
     register,
     formState: { errors },
@@ -14,48 +15,72 @@ const Login = () => {
   } = useForm();
 
   const [
-    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
     user,
     loading,
     error,
-  ] = useSignInWithEmailAndPassword(auth);
+  ] = useCreateUserWithEmailAndPassword(auth);
+
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+  const navigate = useNavigate()
 
   let errorMessage;
 
-  const navigate = useNavigate()
-  const location = useLocation();
-  let from = location.state?.from?.pathname || "/";
 
-
-  if(loading || gLoading){
+  if(loading || gLoading || updating){
       return <Loading></Loading>
   }
 
-  if(error || gError){
-    errorMessage= <p className="text-red-500"><small>{error?.message || gError?.message}</small></p>
+  if(error || gError || updateError){
+    errorMessage= <p className="text-red-500"><small>{error?.message || gError?.message || updateError?.message}</small></p>
   }
 
-  if ( user || gUser) {
-    navigate(from, { replace: true });
+  if ( user || gUser ) {
+    console.log(user || gUser);
   }
 
   if (error || gError) {
     console.log(error);
   }
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    signInWithEmailAndPassword(data.email, data.password)
+   await createUserWithEmailAndPassword(data.email, data.password)
+    await updateProfile({ displayName: data.name });
+    console.log('update done');
+    navigate('/pruchase')
   };
-
-  return (
-    <div className="flex justify-center items-center h-screen">
+    return (
+        <div className="flex justify-center items-center h-screen">
       <div class="card w-96 bg-base-100 shadow-xl">
         <div class="card-body">
-          <h2 class="text-center text-2xl font-bold">LOGIN</h2>
-    {/* {email} */}
+          <h2 class="text-center text-2xl font-bold">SIGNUP</h2>
+    {/* {name} */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div class="form-control w-full max-w-xs">
+              <label class="label">
+                <span class="label-text">Name</span>
+               
+              </label>
+              <input
+                type="text"
+                placeholder="Your Name"
+                class="input input-bordered w-full max-w-xs"
+                {...register("name", {
+                    required:{
+                        value: true,
+                        message: 'Name is Required'
+                    }
+                  })} 
+              />
+              <label class="label">
+              {errors.name?.type === 'required' && <span class="label-text-alt text-red-500">{errors.name.message}</span>}      
+              </label>
+            </div>  
+            
+            {/* email */}
+             <div class="form-control w-full max-w-xs">
               <label class="label">
                 <span class="label-text">Email</span>
                
@@ -82,7 +107,7 @@ const Login = () => {
               
               </label>
             </div>
-            
+            {/* passwprd */}
             <div class="form-control w-full max-w-xs">
               <label class="label">
                 <span class="label-text">Password</span>
@@ -112,14 +137,14 @@ const Login = () => {
             
             {errorMessage}
 
-            <input className="btn w-full max-w-xs" type="submit" value="LOGIN" />
+            <input className="btn w-full max-w-xs" type="submit" value="SIGNUP" />
           </form>
 
           <p>
             <small>
-              New To Monota Car Tools?{" "}
-              <Link className="text-primary mx-2" to="/signup">
-                Create New Account
+              ALready Have An Account?{" "}
+              <Link className="text-primary mx-2" to="/login">
+                Please Login
               </Link>
             </small>{" "}
           </p>
@@ -131,7 +156,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  );
+    );
 };
 
-export default Login;
+export default SignUp;
