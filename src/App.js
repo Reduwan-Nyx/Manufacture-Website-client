@@ -16,6 +16,8 @@ import Dashboad from "./Pages/Dashboard/Dashboad";
 import MyPurchase from "./Pages/Dashboard/MyPurchase";
 import MyReview from "./Pages/Dashboard/MyReview";
 import MyProfile from "./Pages/Dashboard/MyProfile";
+import Users from "./Pages/Dashboard/Users";
+
 
 function App() {
   return (
@@ -43,7 +45,9 @@ function App() {
           }
         >
           <Route index element={<MyPurchase></MyPurchase>}></Route>
-          <Route path="review" element={<MyReview></MyReview>}></Route> <Route path="myprofile" element={<MyProfile></MyProfile>}></Route>
+          <Route path="review" element={<MyReview></MyReview>}>
+            </Route> <Route path="myprofile" element={<MyProfile></MyProfile>}>
+            </Route> <Route path="users" element={<Users></Users>}></Route> 
         </Route>
 
         <Route path="protfolio" element={<MyProtfolio />} />
