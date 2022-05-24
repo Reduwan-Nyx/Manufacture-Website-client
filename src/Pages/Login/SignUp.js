@@ -142,7 +142,7 @@ const SignUp = () => {
 
           <p>
             <small>
-              ALready Have An Account?{" "}
+              ALready Have An Monota Account?{" "}
               <Link className="text-primary mx-2" to="/login">
                 Please Login
               </Link>
