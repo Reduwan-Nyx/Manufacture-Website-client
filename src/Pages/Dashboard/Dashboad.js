@@ -28,9 +28,14 @@ const Dashboad = () => {
            <li>
             <Link to="/dashboad/myprofile">My Profile</Link>
           </li>
-         {admin && <li>
+         {admin && <>
+          <li>
             <Link to="/dashboad/users">All Users</Link>
-          </li>}
+          </li>
+          <li>
+            <Link to="/dashboad/addproduct">Add A Product</Link>
+          </li>
+         </>}
         </ul>
       </div>
     </div>

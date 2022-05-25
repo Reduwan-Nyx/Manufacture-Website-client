@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import './Tools.css'
 const Tools = ({ tools }) => {
   const {
+    _id,
     name,
     img,
     description,
@@ -13,8 +14,8 @@ const Tools = ({ tools }) => {
 
   const navigate = useNavigate()
 
-  const naviagteToPurchase = () =>{
-    navigate(`/pruchase`)
+  const naviagteToPurchase = id =>{
+    navigate(`/pruchase/${id}`)
 }
 
   return (
@@ -34,7 +35,7 @@ const Tools = ({ tools }) => {
         <>available quantity: {availablequantity}</>
       </h2>
       <button
-      onClick={() => naviagteToPurchase()}
+      onClick={() => naviagteToPurchase(_id)}
        
         className="button-inv btn "
       >
