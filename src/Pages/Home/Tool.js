@@ -4,6 +4,7 @@ import "./Tool.css";
 
 const Tool = () => {
   const [tool, setTools] = useState([]);
+  const [products, setProducts] = useState(null)
 
   useEffect(() => {
     fetch('http://localhost:5000/services')
@@ -15,7 +16,9 @@ const Tool = () => {
       <h2 className="m-5 text-3xl text-secondary">Our Tools</h2>
       <div className="tool-container">
         {tool.map((tools) => (
-          <Tools key={tools._id} tools={tools}></Tools>
+          <Tools key={tools._id} tools={tools}
+          setProducts={setProducts}
+          ></Tools>
         ))}
       </div>
     </div>

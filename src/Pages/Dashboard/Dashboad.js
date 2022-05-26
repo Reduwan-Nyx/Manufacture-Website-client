@@ -35,6 +35,9 @@ const Dashboad = () => {
           <li>
             <Link to="/dashboad/addproduct">Add A Product</Link>
           </li>
+          <li>
+            <Link to="/dashboad/manageproduct">Manage Product</Link>
+          </li>
          </>}
         </ul>
       </div>

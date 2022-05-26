@@ -1,37 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import {  useParams } from "react-router-dom";
-import './Purchase.css'
-const Purchase = () => {
-    const [inventory, setInventory] = useState({});
-    const { inventoryId } = useParams();
+import BookingModal from './BookingModal';
+import Service from './Service';
 
-    useEffect(() => {
-        const url = `http://localhost:5000/services/${inventoryId}`;
-        fetch(url)
-          .then((res) => res.json())
-          .then((data) => setInventory(data));
-      }, []);
-    
-    return (
-        <div className='purchase-container m-10'>
-        <div className="tools-img">
-        <img src={inventory.img} alt="" />
-      </div>
-      <div className='ml-10 mt-5'>
-      <h2>{inventory.name}</h2>
-      <p>price: {inventory.price}</p>
-      <p>
-        <small>{inventory.description}</small>
-      </p>
-      <h2 className="mt-2">
-        <>minimum order quantity: {inventory.minimumorderquantity}</>
-      </h2> 
-      <h2>
-        <>available quantity: {inventory.availablequantity}</>
-      </h2>
-      </div>
+const Purchase = () => {
+  const [services, setServices] = useState([])
+  const [booking, setBooking] = useState(null)
+
+
+  useEffect(()=>{
+    fetch('http://localhost:5000/services')
+    .then(res => res.json())
+    .then(data => setServices(data))
+  },[])
+  return (
+    <div>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+          {
+            services.map(service => <Service 
+            key={service._id}
+            service={service}
+            setBooking={setBooking}
+            ></Service>)
+          }
         </div>
-    );
+        {booking && <BookingModal booking={booking}
+        setBooking={setBooking}
+        ></BookingModal>}
+    </div>
+  );
 };
 
 export default Purchase;
